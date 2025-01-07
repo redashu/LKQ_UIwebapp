@@ -11,7 +11,7 @@ export class S3Stack444 extends cdk.Stack {
     const bucket = new s3.Bucket(this, 'MyFirstBucket', {
       versioned: true,
       removalPolicy: cdk.RemovalPolicy.DESTROY,
-      bucketName: 'my-first-bucket-123456',
+      bucketName: 'my-first-bucket-1234567ashutoshh',
     });
     // create ec2 instance
   }
