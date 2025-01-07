@@ -23,6 +23,7 @@ jobs:
     # Step 3: Install dependencies
     - name: Install dependencies
       run: | 
+        cd s3 
         npm install  # Install dependencies listed in package.json
         npm install -g aws-cdk  # Install the AWS CDK CLI globally
 
