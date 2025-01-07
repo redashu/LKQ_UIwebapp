@@ -1,0 +1,36 @@
+name: CDK Deploy
+
+on:
+  push:
+    branches:
+      - master
+
+jobs:
+  deploy:
+    runs-on: ubuntu-latest
+
+    steps:
+    - name: Checkout repository
+      uses: actions/checkout@v2
+
+    - name: Set up Node.js
+      uses: actions/setup-node@v3
+      with:
+        node-version: '20'
+
+    - name: Install dependencies
+      run: | 
+        npm install
+        npm install -g aws-cdk
+
+    # Step 5: Run CDK Synth (to ensure it works correctly)
+      - name: CDK Synth
+        run: |
+          cd s3 && cdk synth
+  
+    - name: Deploy CDK stack
+      env:
+        AWS_ACCESS_KEY_ID: ${{ secrets.AWS_ACCESS_KEY_ID }}
+        AWS_SECRET_ACCESS_KEY: ${{ secrets.AWS_SECRET_ACCESS_KEY }}
+      run: | 
+          cd s3 && cdk deploy --require-approval never
